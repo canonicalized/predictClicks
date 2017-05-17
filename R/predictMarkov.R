@@ -26,7 +26,6 @@ predictMarkov <- function(pageview_names) {
 #' @export
 #' @import markovchain
 predictNextPage <- function(current_url){
-  load("data/mcfL.rda")
   current_url <- current_url[!grepl("undefined", current_url)]
 
   message("Predicting next page for ", current_url)
