@@ -7,6 +7,7 @@
 #' @export
 
 predictClicks <- function(current_url){
+  return("asd")
   out <- try(predict(model$estimate, newdata = current_url), silent = TRUE)
   if(inherits(out, "try-error")){
     out <- "None"
