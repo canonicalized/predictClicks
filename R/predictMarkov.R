@@ -26,11 +26,12 @@ predictMarkov <- function(pageview_names) {
 #' @export
 #' @import markovchain
 predictNextPage <- function(current_url){
+
   current_url <- current_url[!grepl("undefined", current_url)]
 
   message("Predicting next page for ", current_url)
 
-  markovList <-  mcfL$estimate
+  markovList <-  model$estimate
   out <- try(predict(markovList, newdata = current_url), silent = TRUE)
 
   if(inherits(out, "try-error")){
