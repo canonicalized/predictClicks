@@ -31,7 +31,7 @@ predictNextPage <- function(current_url){
 
   message("Predicting next page for ", current_url)
 
-  markovList <-  model$estimate
+  markovList <- model$estimate
   out <- try(predict(markovList, newdata = current_url), silent = TRUE)
 
   if(inherits(out, "try-error")){
@@ -50,6 +50,35 @@ predictNextPage <- function(current_url){
   out
 }
 
+#' Predict next page model 2
+#'
+#' @param current_url the url to predict from
+#' @export
+#' @import markovchain
+predictPetmart <- function(current_url){
+
+  current_url <- current_url[!grepl("undefined", current_url)]
+
+  message("Predicting next page for ", current_url)
+
+  markovList <-  model$estimate
+  out <- try(predict(markovList, newdata = current_url), silent = TRUE)
+
+  if(inherits(out, "try-error")){
+
+    ## try just with last page
+    ll <- length(current_url)
+    retry_urls <- current_url[ll]
+    out <- try(predict(markovList, newdata = retry_urls), silent = TRUE)
+
+    if(inherits(out, "try-error")){
+      message("No prediction available")
+      return(NULL)
+    }
+  }
+
+  out
+}
 
 #' Replace a string with substitutions
 #'
