@@ -1,25 +1,3 @@
-#' Take some pageviews, output Markov model prediction
-#'
-#' @param pageview_names A character vector of pageview names
-#'
-#' @return The prediction
-#' @import clickstream
-#' @export
-predictMarkov <- function(pageview_names) {
-
-  ## mc loaded on package load
-  states <- invisible(clickstream::states(model))
-
-  pv_n <- pageview_names[pageview_names %in% states]
-
-  startPattern <- new("Pattern", sequence = pv_n)
-
-  predit <- predict(model, startPattern)
-
-  list(page = predit@sequence,
-       probability = predit@probability)
-}
-
 #' Predict next page model 2
 #'
 #' @param current_url the url to predict from

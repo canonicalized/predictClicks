@@ -3,8 +3,6 @@
 export(aggregateVD)
 export(cleanURL)
 export(petmart)
-export(predictMarkov)
 export(predictNextPage)
 export(predictPetmart)
-import(clickstream)
 import(markovchain)
