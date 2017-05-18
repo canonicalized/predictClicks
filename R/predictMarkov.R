@@ -61,7 +61,7 @@ predictPetmart <- function(current_url){
 
   message("Predicting next page for ", current_url)
 
-  markovList <-  model$estimate
+  markovList <- model$estimate
   out <- try(predict(markovList, newdata = current_url), silent = TRUE)
 
   if(inherits(out, "try-error")){
