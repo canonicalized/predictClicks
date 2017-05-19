@@ -2,7 +2,5 @@
 
 export(aggregateVD)
 export(cleanURL)
-export(petmart)
 export(predictNextPage)
-export(predictPetmart)
 import(markovchain)

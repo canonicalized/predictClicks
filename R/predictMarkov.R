@@ -28,36 +28,6 @@ predictNextPage <- function(current_url){
   out
 }
 
-#' Predict next page model 2
-#'
-#' @param current_url the url to predict from
-#' @export
-#' @import markovchain
-predictPetmart <- function(current_url){
-
-  current_url <- current_url[!grepl("undefined", current_url)]
-
-  message("Predicting next page for ", current_url)
-
-  markovList <- model$estimate
-  out <- try(predict(markovList, newdata = current_url), silent = TRUE)
-
-  if(inherits(out, "try-error")){
-
-    ## try just with last page
-    ll <- length(current_url)
-    retry_urls <- current_url[ll]
-    out <- try(predict(markovList, newdata = retry_urls), silent = TRUE)
-
-    if(inherits(out, "try-error")){
-      message("No prediction available")
-      return(NULL)
-    }
-  }
-
-  out
-}
-
 #' Replace a string with substitutions
 #'
 #' @param string_vector vector of (URL) strings
@@ -98,33 +68,6 @@ aggregateVD <- function(string_vector){
   string_vector <- cleanURL(string_vector, "search/result", replace = "search_result")
   string_vector <- cleanURL(string_vector, "?", "site_search")
   string_vector <- cleanURL(string_vector, "blog")
-  string_vector <- cleanURL(string_vector, "employees-list", replace = "employees")
-  string_vector <- cleanURL(string_vector, "booking")
-  string_vector <- cleanURL(string_vector, "geography")
-  string_vector <- cleanURL(string_vector, "interest")
-  string_vector <- cleanURL(string_vector, "dragoer")
-  string_vector <- cleanURL(string_vector, "aktiviteter")
-  string_vector <- cleanURL(string_vector, "product")
-  string_vector <- cleanURL(string_vector, "feriecentre")
-  string_vector <- cleanURL(string_vector, "gastronomi")
-  string_vector <- cleanURL(string_vector, "aktiviteter")
-  string_vector <- cleanURL(string_vector, "natur")
-  string_vector <- cleanURL(string_vector, "fur")
-  string_vector <- cleanURL(string_vector, "begivenheder")
-  string_vector <- cleanURL(string_vector, "season")
-  string_vector <- cleanURL(string_vector, "sydjylland")
-  string_vector <- cleanURL(string_vector,  "vestjylland")
-  string_vector <- cleanURL(string_vector, "sydsjaelland")
-  string_vector <- cleanURL(string_vector, "publikationer")
-  string_vector <- cleanURL(string_vector, "oestjylland")
-  string_vector <- cleanURL(string_vector, "nordjylland")
-  string_vector <- cleanURL(string_vector, "koebenhavn")
-  string_vector <- cleanURL(string_vector, "tyskland")
-  string_vector <- cleanURL(string_vector, "sverige")
-  string_vector <- cleanURL(string_vector, "sport")
-  string_vector <- cleanURL(string_vector, "norge")
-  string_vector <- cleanURL(string_vector, "historie")
-  string_vector <- cleanURL(string_vector, "england")
 
   string_vector
 }
